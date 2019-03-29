@@ -10,6 +10,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class AppTest {
     private WebDriver driver = null;
@@ -27,20 +29,17 @@ public class AppTest {
     }
 
     @Test()
-    public void testCreateForm() {
+    public void testCreateForm() throws InterruptedException {
         driver.navigate().to("https://ya.ru");
         driver.findElement(By.xpath("//div[@class='b-inline']")).click();
         driver.findElement(By.xpath("//*[@data-reactid='24']")).click();
-        WebElement elementTel = element.findElement(By.name("login"));
-        elementTel.click();
-        elementTel.sendKeys("89023930349");
-        elementTel.submit();
-        WebElement elementPas = element.findElement(By.name("passwd"));
-        elementPas.click();
-        elementPas.sendKeys("757414bagaev");
-        elementPas.submit();
+        driver.findElement(By.id("passp-field-login")).sendKeys("89023930349");
+        driver.findElement(By.xpath("//*[@type='submit']")).click();
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+        driver.findElement(By.id("passp-field-passwd")).sendKeys("757414bagaev");
+        driver.findElement(By.xpath("//*[@type='submit']")).click();
         driver.getCurrentUrl().equals("https://mail.yandex.ru/?uid=566972531#inbox");
-
+        Thread.sleep(10000);
 
     }
 
