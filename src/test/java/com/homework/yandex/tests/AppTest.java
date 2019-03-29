@@ -1,6 +1,7 @@
 package com.homework.yandex.tests;
 
 
+import com.homework.yandex.Pages.LogIn;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,19 +29,11 @@ public class AppTest {
         driver.manage().window().maximize();
     }
 
+    
     @Test()
     public void testCreateForm() throws InterruptedException {
-        driver.navigate().to("https://ya.ru");
-        driver.findElement(By.xpath("//div[@class='b-inline']")).click();
-        driver.findElement(By.xpath("//*[@data-reactid='24']")).click();
-        driver.findElement(By.id("passp-field-login")).sendKeys("89023930349");
-        driver.findElement(By.xpath("//*[@type='submit']")).click();
-        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-        driver.findElement(By.id("passp-field-passwd")).sendKeys("757414bagaev");
-        driver.findElement(By.xpath("//*[@type='submit']")).click();
-        driver.getCurrentUrl().equals("https://mail.yandex.ru/?uid=566972531#inbox");
-        Thread.sleep(10000);
-
+        getUrl("");
+        new LogIn("89023930349", "757414bagaev");
     }
 
     @AfterClass
