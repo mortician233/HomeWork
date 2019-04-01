@@ -1,17 +1,24 @@
-package com.homework.yandex.Utils;
+package com.homework.yandex.model;
 
-public class MailData {
-
-
+public class ProjectData {
     private String mailSending;
     private String topicLetter;
 
 
-    public MailData(String mailSending, String topicLetter) {
+    public ProjectData withMailSending(String mailSending) {
         this.mailSending = mailSending;
-        this.topicLetter = topicLetter;
+        return this;
     }
 
+    public ProjectData withPassword(String topicLetter) {
+        this.topicLetter = topicLetter;
+        return this;
+    }
+
+
+    public ProjectData() {
+
+    }
 
     public String getMailSending() {
         return mailSending;
