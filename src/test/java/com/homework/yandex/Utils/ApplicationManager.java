@@ -1,5 +1,6 @@
 package com.homework.yandex.Utils;
 
+
 import com.homework.yandex.Pages.LetterHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -46,6 +47,5 @@ public class ApplicationManager {
     public void tearDown() {
         if (letterHelper.driver != null) letterHelper.driver.quit();
     }
-
 }
 
