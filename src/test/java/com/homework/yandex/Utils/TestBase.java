@@ -1,20 +1,19 @@
 package com.homework.yandex.Utils;
 
-import org.openqa.selenium.By;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
-import java.util.concurrent.TimeUnit;
+public class TestBase {
+    protected final ApplicationManager app = new ApplicationManager();
 
-public class TestBase extends ApplicationTest {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws Exception {
+        app.initData();
+    }
 
-    public void logIn(LogInData logInData) {
-        driver.findElement(By.xpath("//div[@class='b-inline']")).click();
-        driver.findElement(By.xpath("//*[@data-reactid='24']")).click();
-        driver.findElement(By.id("passp-field-login")).sendKeys(logInData.login);
-        driver.findElement(By.xpath("//*[@type='submit']")).click();
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
-        driver.findElement(By.id("passp-field-passwd")).sendKeys(logInData.password);
-        driver.findElement(By.xpath("//*[@type='submit']")).click();
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
-        driver.getCurrentUrl().equals("https://mail.yandex.ru/?uid=566972531#inbox");
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
+        app.tearDown();
     }
 }
+
