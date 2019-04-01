@@ -1,44 +1,40 @@
 package com.homework.yandex.tests;
 
 
-import com.homework.yandex.Pages.LogIn;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.homework.yandex.Pages.Letter;
+import com.homework.yandex.Utils.ApplicationTest;
+import com.homework.yandex.Utils.LogInData;
+import com.homework.yandex.Utils.MailData;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
 
-
-public class AppTest {
-    private WebDriver driver = null;
-    private ChromeOptions options = null;
-    private WebElement element = null;
-
+public class AppTest extends ApplicationTest {
 
     @BeforeClass
     public void initData() {
         System.setProperty("webdriver.chrome.driver",
                 "lib/chromedriver.exe");
-        options = new ChromeOptions();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
-    
+
     @Test()
-    public void testCreateForm() throws InterruptedException {
-        getUrl("");
-        new LogIn("89023930349", "757414bagaev");
+    public void testCreateForm() {
+        getUrl("https://ya.ru/");
+        logIn(new LogInData("89023930349", "757414bagaev"));
+        new Letter().sendingLetter(new MailData("mortician233@gmail.com", "Autotest"));
+
     }
+
 
     @AfterClass
     public void tearDown() {
         if (driver != null) driver.quit();
     }
+
 }
 
