@@ -21,12 +21,26 @@ public class LetterHelper {
         checkEnableElement(By.xpath("//*[@class= 'mail-Done-Title js-title-info' and text()='Письмо отправлено.']"));
     }
 
+    public void deletingLetter(){
+        click(By.xpath("//*[@class= 'mail-NestedList-Item-Name js-folders-item-name' and text()='Отправленные']"));
+        waitLoad(8);
+        selectCheckBox(By.xpath("//*[@class= '_nb-checkbox-flag _nb-checkbox-normal-flag']"));
+        click(By.xpath("//*[@class= 'mail-Toolbar-Item-Text js-toolbar-item-title js-toolbar-item-title-delete' and text()='Удалить']"));
+        checkEnableElement(By.xpath("//*[@class='b-messages__placeholder-item' and text()='В папке «Отправленные» нет писем.']"));
+    }
+
     public void click(By locator) {
         driver.findElement(locator).click();
     }
 
     public void checkEnableElement(By locator){
         driver.findElement(locator).isDisplayed();
+    }
+
+    public void selectCheckBox(By locator) {
+       WebElement checkbox = driver.findElement(locator);
+       checkbox.isSelected();
+       checkbox.click();
     }
 
     public void waitLoad(int waitSeconds) {
