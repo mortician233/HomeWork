@@ -11,7 +11,7 @@ public class AppTest extends TestBase {
     public void testCreateForm() {
         app.getStartPage("https://ya.ru/");
         app.logIn("89023930349", "757414bagaev");
-        app.getLetterHelper().sendingLetter("mortician234@gmail.com", "757414bagaev");
+        app.getLetterHelper().sendingLetter("mortician234@gmail.com", "Autotest");
     }
 }
 
