@@ -67,4 +67,9 @@ public class LetterHelper {
     public void waitLoad(int waitSeconds) {
         driver.manage().timeouts().implicitlyWait(waitSeconds, TimeUnit.SECONDS);
     }
+
+    public void logOut(){
+        driver.findElement(By.xpath("//*[@data-statlog='login.exit']")).click();
+    }
+
 }
