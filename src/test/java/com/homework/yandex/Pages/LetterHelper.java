@@ -1,10 +1,13 @@
 package com.homework.yandex.Pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class LetterHelper {
@@ -37,9 +40,8 @@ public class LetterHelper {
         folderSelection("Входящие");
         mailSection("Входящие");
         selectCheckBox(By.xpath("//*[@class= '_nb-checkbox-flag _nb-checkbox-normal-flag']"));
-        folderSelection("Отправленные");
-        mailSection("Отправленные");
-        checkEnableElement(By.xpath("//*[@class='ns-view-messages-item ns-view-id-576 js-message ns-action js-message-id-t168603511049682960 mid-t168603511049682960' and @count='1']"));
+        folderSelection("Спам");
+        mailSection("Спам");
     }
 
     public void mailSection(String mailSection){
@@ -47,7 +49,17 @@ public class LetterHelper {
     }
 
     public void folderSelection(String folderSelection){
-        new Select(driver.findElement(By.xpath("//*[@data-params='source=toolbar' and @title='В папку (m)']"))).selectByVisibleText(folderSelection);
+        driver.findElement(By.xpath("//*[@data-params='source=toolbar' and @title='В папку (m)']")).click();
+        String parentWindowHandler = driver.getWindowHandle();
+        String subWindowHandler = null;
+        Set<String> handles = driver.getWindowHandles();
+        Iterator<String> iterator = handles.iterator();
+        while (iterator.hasNext()){
+            subWindowHandler = iterator.next();
+        }
+        driver.switchTo().window(subWindowHandler); // switch to pop up с списком папок
+        driver.findElement(By.xpath("//*[@class='b-folders__folder__link js-action' and @title='"+folderSelection+"']")).click();
+        driver.switchTo().window(parentWindowHandler);
     }
 
     public void click(By locator) {
